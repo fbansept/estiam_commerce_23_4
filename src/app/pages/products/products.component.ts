@@ -1,19 +1,38 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductPricePipe } from '../../pipes/product-price.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ProductPricePipe, MatButtonModule, MatCardModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent {
+  now: Date = new Date();
+
+  compteur: number = 20;
+
+  clic() {
+    this.compteur++;
+  }
+
   productList: Product[] = [
     {
       name: 'expresso',
       price: 2,
       description: 'super expresso !',
+      discount: {
+        value: 50,
+        type: 'percent',
+      },
+    },
+    {
+      name: 'deca',
+      price: 2,
     },
     {
       name: 'latte',
@@ -29,9 +48,4 @@ export class ProductsComponent {
       },
     },
   ];
-
-  calculatePrice(product: Product): number {
-    return product.price - 
-        (product.discount ? product.discount.value : 0);
-  }
 }
