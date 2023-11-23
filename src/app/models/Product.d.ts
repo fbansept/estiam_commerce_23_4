@@ -1,10 +1,9 @@
 interface Product {
-  name: string;
+  id: number;
+  title: string;
   price: number;
-  description?: string;
-  disable?: boolean;
-  discount?: {
-    value: number;
-    type: 'percent' | 'fixed';
-  };
+  description: string;
+  discountPercentage: number;
+  thumbnail: string;
+  disable? : boolean
 }

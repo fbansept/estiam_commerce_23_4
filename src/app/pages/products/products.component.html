@@ -1,12 +1,10 @@
-<p (click)="clic()">Date d'aujourd'hui : {{ now | date : "dd/MM/YYY" }}</p>
-
 <div class="container">
   <div class="row">
-    <ng-container *ngFor="let product of productList">
+    <ng-container *ngFor="let product of productList; let i = index">
       <div *ngIf="!product.disable" class="col-6">
         <mat-card class="mb-4">
           <mat-card-header>
-            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-title>{{ product.title }}</mat-card-title>
             <mat-card-subtitle
               >{{
                 product | productPrice | number : "1.2-2"
@@ -14,18 +12,14 @@
               €</mat-card-subtitle
             >
           </mat-card-header>
-          <img
-            mat-card-image
-            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-            alt="Photo of a Shiba Inu"
-          />
+          <img mat-card-image [attr.src]="product.thumbnail" />
           <mat-card-content>
             <p>
               {{ product.description || "No description" }}
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button color="accent">Edit</button>
+            <button mat-raised-button class="me-2" color="accent">Edit</button>
             <button mat-raised-button color="warn">Delete</button>
           </mat-card-actions>
         </mat-card>
