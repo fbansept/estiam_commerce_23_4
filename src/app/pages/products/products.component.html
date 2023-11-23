@@ -1,1 +1,9 @@
-<p>{{ title }}</p>
+<ul>
+  <ng-container *ngFor="let product of productList">
+    <li *ngIf="!product.disable">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description || "sans description" }}</p>
+      <i>{{ calculatePrice(product) }} €</i>
+    </li>
+  </ng-container>
+</ul>
