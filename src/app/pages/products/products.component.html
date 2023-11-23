@@ -1,8 +1,10 @@
 <div class="container">
+  <button mat-raised-button color="primary" class="mb-3">Add product</button>
+
   <div class="row">
     <ng-container *ngFor="let product of productList; let i = index">
       <div *ngIf="!product.disable" class="col-6">
-        <mat-card class="mb-4">
+        <mat-card class="product-card mb-4">
           <mat-card-header>
             <mat-card-title>{{ product.title }}</mat-card-title>
             <mat-card-subtitle
@@ -12,7 +14,11 @@
               €</mat-card-subtitle
             >
           </mat-card-header>
-          <img mat-card-image [attr.src]="product.thumbnail" />
+          <img
+            mat-card-image
+            class="product-img"
+            [attr.src]="product.thumbnail"
+          />
           <mat-card-content>
             <p>
               {{ product.description || "No description" }}
@@ -27,5 +33,3 @@
     </ng-container>
   </div>
 </div>
-
-<button mat-raised-button color="primary">Add product</button>
