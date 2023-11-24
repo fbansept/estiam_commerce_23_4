@@ -32,8 +32,17 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button class="me-2" color="accent">Edit</button>
-            <button mat-raised-button color="warn">Delete</button>
+            <button
+              *ngIf="isSeller"
+              mat-raised-button
+              class="me-2"
+              color="accent"
+            >
+              Edit
+            </button>
+            <button *ngIf="isSeller" mat-raised-button color="warn">
+              Delete
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>

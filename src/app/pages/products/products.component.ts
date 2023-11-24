@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -21,12 +22,17 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   now: Date = new Date();
+  isSeller: boolean = false;
 
   productList: Product[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   ngOnInit() {
+    this.auth._user.subscribe(
+      (user) => (this.isSeller = user ? user?.isSeller : false)
+    );
+
     // this.http
     //   .get<Product[]>('https://dummyjson.com/products')
     //   .subscribe((productList) => (this.productList = productList));
