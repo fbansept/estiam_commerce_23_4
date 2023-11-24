@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -34,5 +36,17 @@ export class EditProductComponent {
     description: ['', [Validators.required]],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
+  onFormSubmit() {
+    if (this.form.valid) {
+      this.http
+        .post('http://localhost:8080/product', this.form.value)
+        .subscribe((result) => this.router.navigateByUrl('/products'));
+    }
+  }
 }
