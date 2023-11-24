@@ -4,11 +4,18 @@ import { ProductPricePipe } from '../../pipes/product-price.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ProductPricePipe, MatButtonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    ProductPricePipe,
+    MatButtonModule,
+    MatCardModule,
+    RouterLink,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })

@@ -1,4 +1,26 @@
-<form>
-  <input />
-  <button>test</button>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Price</mat-label>
+    <input
+      matInput 
+      type="number" 
+      placeholder="0" 
+      formControlName="price" />
+    <span matTextPrefix>€&nbsp;</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary">
+    <mat-icon fontIcon="add"></mat-icon>
+    Add product
+  </button>
 </form>
