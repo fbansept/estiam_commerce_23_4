@@ -28,6 +28,16 @@
             >Products</a
           >
         </li>
+
+        <li *ngIf="!user" class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active"
+            >Login</a
+          >
+        </li>
+
+        <li *ngIf="user" class="nav-item" style="cursor: pointer">
+          <a class="nav-link" (click)="onClicLogout()">Logout</a>
+        </li>
       </ul>
       <form class="d-flex">
         <input
