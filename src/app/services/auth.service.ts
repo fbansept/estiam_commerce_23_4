@@ -8,10 +8,6 @@ export class AuthService {
   public readonly _user: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
 
-  constructor() {
-    this.login();
-  }
-
   login(jwt?: string | null): void {
     if (jwt) {
       localStorage.setItem('jwt', jwt);
@@ -28,8 +24,10 @@ export class AuthService {
       // const data = JSON.parse(json);
 
       const data = JSON.parse(atob(jwt.split('.')[1]));
+
       this._user.next({
-        email: data.email,
+        id: data.id,
+        email: data.sub,
         isSeller: data.isSeller,
         isCustomer: data.isCustomer,
         isAdmin: data.isAdmin,
@@ -44,5 +42,9 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this._user.value?.isAdmin || false;
+  }
+
+  isSeller(): boolean {
+    return this._user.value?.isSeller || false;
   }
 }

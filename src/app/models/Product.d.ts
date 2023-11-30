@@ -3,7 +3,7 @@ interface Product {
   name: string;
   price: number;
   description: string;
-  discountPercentage: number;
+  productOfferList?: ProductOffer[];
   thumbnail: string;
   disable?: boolean;
 }

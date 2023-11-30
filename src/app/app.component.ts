@@ -23,14 +23,13 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private auth: AuthService, 
-    private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   user: User | null = null;
 
   ngOnInit() {
-    this.auth._user
-      .subscribe((user) => (this.user = user));
+    this.auth._user.subscribe((user) => (this.user = user));
+    this.auth.login();
   }
 
   onClicLogout() {

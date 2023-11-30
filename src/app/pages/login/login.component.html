@@ -1,10 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onLogin()">
-
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input matInput formControlName="email" />
     <mat-error *ngIf="form.get('email')?.hasError('required')">
-      Name is mandatory
+      Email is mandatory
     </mat-error>
   </mat-form-field>
 
@@ -16,7 +15,5 @@
     </mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary">
-    Connexion
-  </button>
+  <button mat-raised-button color="primary">Connexion</button>
 </form>

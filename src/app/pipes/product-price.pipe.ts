@@ -5,9 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class ProductPricePipe implements PipeTransform {
-  transform(product: Product): number {
-    if (product.discountPercentage) {
-      return product.price - (product.price * product.discountPercentage) / 100;
+  transform(product: ProductOffer): number {
+
+    if (product.discountCode) {
+      
+      if (product.percentageDiscount) {
+        return product.price - (product.price * product.discount) / 100;
+      }
+      return product.price - product.discount;
     }
 
     return product.price;

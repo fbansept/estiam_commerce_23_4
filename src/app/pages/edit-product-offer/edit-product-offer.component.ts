@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { HttpClient } from '@angular/common/http';
 import {
-  FormBuilder,
   FormGroup,
+  Validators,
+  FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-edit-product',
+  selector: 'app-edit-product-offer',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,16 +26,14 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatIconModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './edit-product.component.html',
-  styleUrl: './edit-product.component.scss',
+  templateUrl: './edit-product-offer.component.html',
+  styleUrl: './edit-product-offer.component.scss',
 })
-export class EditProductComponent implements OnInit {
-  idProduct: number | null = null;
+export class EditProductOfferComponent implements OnInit {
+  idProductOffer: number | null = null;
 
   form: FormGroup = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.maxLength(50)]],
     price: [0, [Validators.required, Validators.min(0.01)]],
-    description: ['', [Validators.required]],
   });
 
   constructor(
@@ -47,10 +45,10 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.idProduct = params['id'];
+      this.idProductOffer = params['id'];
 
       this.http
-        .get('http://localhost:8080/product/' + this.idProduct)
+        .get('http://localhost:8080/product-offer/' + this.idProductOffer)
         .subscribe((product) => {
           //hydrate le formulaire avec le produit (matching entre propriété de l'objet et nom des formControl)
           this.form.patchValue(product);
@@ -61,8 +59,8 @@ export class EditProductComponent implements OnInit {
   onFormSubmit() {
     if (this.form.valid) {
       this.http
-        .post('http://localhost:8080/product', this.form.value)
-        .subscribe((result) => this.router.navigateByUrl('/products'));
+        .post('http://localhost:8080/product-offer', this.form.value)
+        .subscribe((result) => this.router.navigateByUrl('/product-offers'));
     }
   }
 }

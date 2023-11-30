@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProductsComponent implements OnInit {
   now: Date = new Date();
-  isSeller: boolean = false;
+  isAdmin: boolean = false;
 
   productList: Product[] = [];
 
@@ -30,12 +30,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.auth._user.subscribe(
-      (user) => (this.isSeller = user ? user?.isSeller : false)
+      (user) => (this.isAdmin = user ? user?.isAdmin : false)
     );
-
-    // this.http
-    //   .get<Product[]>('https://dummyjson.com/products')
-    //   .subscribe((productList) => (this.productList = productList));
 
     this.http
       .get<any>('http://localhost:8080/products')
