@@ -38,7 +38,25 @@ export class ProductsComponent implements OnInit {
     //   .subscribe((productList) => (this.productList = productList));
 
     this.http
-      .get<any>('https://dummyjson.com/products')
-      .subscribe((result) => (this.productList = result.products));
+      .get<any>('http://localhost:8080/products')
+      .subscribe((productList) => {
+        this.productList = productList;
+        console.log(this.productList);
+      });
+  }
+
+  onClickDeleteProduct(idProduct: number): void {
+    this.http
+      .delete<Product>('http://localhost:8080/admin/product/' + idProduct)
+      .subscribe({
+        next: (product) => {
+          alert('produit supprimé');
+          console.log(product);
+        },
+        error: (error) => {
+          alert('erreur');
+          console.log(error);
+        },
+      });
   }
 }

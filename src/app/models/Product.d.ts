@@ -1,9 +1,9 @@
 interface Product {
   id: number;
-  title: string;
+  name: string;
   price: number;
   description: string;
   discountPercentage: number;
   thumbnail: string;
-  disable? : boolean
+  disable?: boolean;
 }

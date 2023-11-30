@@ -19,7 +19,7 @@ export class AuthService {
       jwt = localStorage.getItem('jwt');
     }
 
-    //si le jwt en parametre est null et qu'il 
+    //si le jwt en parametre est null et qu'il
     //n'existe pas non plus dans le localstorage
     if (jwt) {
       // const split: string[] = jwt.split('.');
@@ -28,12 +28,21 @@ export class AuthService {
       // const data = JSON.parse(json);
 
       const data = JSON.parse(atob(jwt.split('.')[1]));
-      this._user.next({ email: data.email, isSeller: data.isSeller });
+      this._user.next({
+        email: data.email,
+        isSeller: data.isSeller,
+        isCustomer: data.isCustomer,
+        isAdmin: data.isAdmin,
+      });
     }
   }
 
   logout() {
     localStorage.removeItem('jwt');
     this._user.next(null);
+  }
+
+  isAdmin(): boolean {
+    return this._user.value?.isAdmin || false;
   }
 }

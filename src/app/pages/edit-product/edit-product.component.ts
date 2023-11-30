@@ -50,7 +50,14 @@ export class EditProductComponent implements OnInit {
       this.idProduct = params['id'];
 
       //TODO requete ajax pour recupérer un product en fonctio de l'id
-      const product: Product = {title: "", price: 0, description: "", thumbnail: "", id: 0, discountPercentage: 20};
+      const product: Product = {
+        name: '',
+        price: 0,
+        description: '',
+        thumbnail: '',
+        id: 0,
+        discountPercentage: 20,
+      };
 
       //hydrate le formulaire avec le produit (matching entre propriété de l'objet et nom des formControl)
       this.form.patchValue(product);

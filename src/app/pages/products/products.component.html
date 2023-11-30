@@ -13,7 +13,7 @@
       <div *ngIf="!product.disable" class="col-6">
         <mat-card class="product-card mb-4">
           <mat-card-header>
-            <mat-card-title>{{ product.title }}</mat-card-title>
+            <mat-card-title>{{ product.name }}</mat-card-title>
             <mat-card-subtitle
               >{{
                 product | productPrice | number : "1.2-2"
@@ -40,7 +40,7 @@
             >
               Edit
             </button>
-            <button *ngIf="isSeller" mat-raised-button color="warn">
+            <button *ngIf="isSeller" mat-raised-button color="warn" (click)="onClickDeleteProduct(product.id)">
               Delete
             </button>
           </mat-card-actions>
