@@ -49,16 +49,18 @@ const canMatchSellerCreator: CanMatchFn = (
   const authService: AuthService = inject(AuthService);
   const http: HttpClient = inject(HttpClient);
 
-  console.log(authService.isSeller());
-  console.log(authService._user.value);
-
+  //si l'utilisateur n'est pas vendeur on le redirige vers la page de login
   if (authService.isSeller()) {
+    //On extrait l'id du produit de l'url
     const matcher = route.matcher || defaultUrlMatcher;
     const matchResult = matcher(state, new UrlSegmentGroup(state, {}), route);
     const idProductOffer: string | undefined =
       matchResult?.posParams?.['id'].path;
 
+    //si l'id existe dans l'url
     if (idProductOffer) {
+      //on recupere le product offer de ce vendeur (l'id du vendeur est extrait du JWT)
+      //si l'id du vendeur est bien celui du créateur de l'offre on autorise l'accès
       return http
         .get<ProductOffer>(
           'http://localhost:8080/product-offer/' + idProductOffer
@@ -68,7 +70,7 @@ const canMatchSellerCreator: CanMatchFn = (
             return productOffer.seller.id == authService._user.value?.id;
           }),
           catchError((err) => {
-            return of(false);
+            return of(router.createUrlTree(['page-not-found']));
           })
         );
     }
